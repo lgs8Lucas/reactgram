@@ -47,11 +47,31 @@ const register = async (req, res) => {
 };
 
 // Sign user in
-const login = (req, res) => {
-	res.send("login");
+const login = async (req, res) => {
+	const { email, password } = req.body;
+	const user = await User.findOne({ email });
+
+	//check if user exists
+	if (!user) {
+		res.status(404).json({ errors: ["Usuário não encontrado."] });
+		return;
+	}
+
+	//check if password matches
+	if (!(await bcrypt.compare(password, user.password))) {
+		res.status(422).json({ errors: ["Senha inválida."] });
+		return;
+	}
+
+	//Return user with token
+	res.status(201).json({
+		_id: user._id,
+		profileImage: user.profileImage,
+		token: generateToken(user._id),
+	});
 };
 
 module.exports = {
 	register,
-	login
+	login,
 };
