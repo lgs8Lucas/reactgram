@@ -21,7 +21,7 @@ const photoInsertValidation = () => {
 
 const photoUpdateValidation = () => {
 	console.log("");
-	
+
 	return [
 		body("title")
 			.not()
@@ -34,7 +34,14 @@ const photoUpdateValidation = () => {
 	];
 };
 
+const commentValidation = () => {
+	return [
+		body("comment").isString().withMessage("O comentário é obrigatório."),
+	];
+};
+
 module.exports = {
 	photoInsertValidation,
 	photoUpdateValidation,
+	commentValidation,
 };
