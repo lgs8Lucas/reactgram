@@ -9,6 +9,7 @@ const {
 	getUserPhotos,
 	GetPhotoById,
 	updatePhoto,
+	likePhoto,
 } = require("../controllers/PhotoController");
 
 //Middlewares
@@ -38,5 +39,7 @@ router.get("/user/:id", authGuard, getUserPhotos);
 router.get("/:id", authGuard, GetPhotoById);
 
 router.put("/:id", authGuard, photoUpdateValidation(), validate, updatePhoto);
+
+router.put("/like/:id", authGuard, likePhoto);
 
 module.exports = router;
