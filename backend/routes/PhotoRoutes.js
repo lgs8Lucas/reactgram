@@ -7,6 +7,7 @@ const {
 	deletePhoto,
 	getAllPhotos,
 	getUserPhotos,
+	GetPhotoById,
 } = require("../controllers/PhotoController");
 
 //Middlewares
@@ -29,5 +30,7 @@ router.delete("/:id", authGuard, deletePhoto);
 router.get("/", authGuard, getAllPhotos);
 
 router.get("/user/:id", authGuard, getUserPhotos);
+
+router.get("/:id", authGuard, GetPhotoById);
 
 module.exports = router;
