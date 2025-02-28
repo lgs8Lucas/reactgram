@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export const useAuth = () => {
-	const { user } = useSelector((state) => state.auth);
-	const [auth, setAuth] = useState(false);
+	const authState = useSelector((state) => state.auth);
+	const user = authState.user;
+	const [auth, setAuth] = useState(null);
 	const [loading, setLoading] = useState(true);
-
 	useEffect(() => {
 		if (user) {
 			setAuth(true);
@@ -15,5 +15,5 @@ export const useAuth = () => {
 		setLoading(false);
 	}, [user]);
 
-	return [auth, loading];
+	return {auth, loading};
 };
