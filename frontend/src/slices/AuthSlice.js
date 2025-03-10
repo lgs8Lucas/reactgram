@@ -24,7 +24,7 @@ export const register = createAsyncThunk(
 );
 
 // Logout an user
-const logout = createAsyncThunk("auth/logout", async () => {
+export const logout = createAsyncThunk("auth/logout", async () => {
 	await authService.logout();
 });
 
